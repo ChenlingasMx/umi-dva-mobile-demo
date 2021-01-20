@@ -1,5 +1,4 @@
 # umi+dva+antd-mobile
-[![Build With umi](https://img.shields.io/badge/build%20with-Taro-028fe4.svg?style=flat-square)](https://umijs.com/)
 [![Build With dva](https://img.shields.io/badge/build%20with-dva-028fe4.svg?style=flat-square)](https://dvajs.com/)
 
 #### 介绍
