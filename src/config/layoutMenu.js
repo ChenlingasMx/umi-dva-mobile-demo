@@ -10,11 +10,11 @@ export const TabBarData=[
         url: '/home',
       },
       {
-        id: 'class',
+        id: 'classify',
         name: '分类',
         icon: require('images/recycleH5_03.png'),
         selectedicon: require('images/recycleH5_06.png'),
-        url: '/class',
+        url: '/classify',
       },
       {
         id: 'my',

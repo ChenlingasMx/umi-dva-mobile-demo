@@ -1,4 +1,4 @@
-import fetch from 'dva/fetch';
+import fetch from 'dva';
 import { Toast } from 'antd-mobile';
 import { setUrlEncoded } from './baseServer';
 import { getToken, setToken } from './token';
@@ -121,7 +121,6 @@ function proxyRequest(url, options, showError = true) {
       e.message = response.message || `Failed to get data code : ${e.code}`;
       throw e;
   }).catch((e,url) => {
-    console.log(e,'errrr')
     const status = e.code;
       if (status === 401) {
         // @HACK

@@ -10,8 +10,8 @@ import { TabBarData } from "inconf/layoutMenu";
 class Index extends Component {
   initPath = () =>{
     const ULR_NO_LAYOUT=['/'];
-    TabBarData.map((item)=>{
-      ULR_NO_LAYOUT.push(item.url);
+    TabBarData.map((item) => {
+      return ULR_NO_LAYOUT.push(item.url);
     });
     return ULR_NO_LAYOUT;
   }
@@ -22,7 +22,6 @@ class Index extends Component {
   renderBody = () => {
     const {location: {pathname}, children } = this.props;
     if (this.initPath().includes(pathname)) {
-		console.log(pathname);
       return  (<BaseLayout {...this.props} />);
     }
     return (

@@ -1,12 +1,27 @@
 import { reg } from 'services/home';
-import router from 'umi/router';
 export default {
   namespace: 'home',
   state: {
-    'list':{
-      'productList': '',
-      'bannerList': ''
-    }
+      bannerList:[
+      {
+        isShow:1,
+        url:null,
+        imageUrl:"../../../assets/2c3968e33e2342feaa9fa3695b2e169e.png",
+        comment:"仅做展示"}
+      ],
+      productList:[
+        {
+          id:1,
+          productName:"苹果 iPhone",
+          topPrice:7500,
+          imgUrl:"",
+        },{
+          id:2,
+          productName:"苹果 iPhone",
+          topPrice:2265,
+          imgUrl:"",
+        }
+      ]
   },
   effects: {
     *reg({ payload, callback }, { call, put }) {
@@ -18,22 +33,8 @@ export default {
     }
   },
   reducers: {
-    setData(state, { payload }) {
-      return {
-        ...state,
-        list: payload,
-      }
-    }
-  },
-  subscriptions: {
-    setup({ dispatch, history }) {
-      return history.listen(({ pathname, search }) => {
-        if (pathname == '/home'||pathname == '/') {
-          dispatch({
-            type: 'reg',
-          });
-        }
-      });
+    updateData(state, { payload }) {
+      return { ...state, ...payload };
     },
   },
 };
