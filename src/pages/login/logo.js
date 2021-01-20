@@ -1,5 +1,5 @@
 import React from 'react'
-import logoImg from '../../assets/321611110734_.pic_hd.jpg'
+import logoImg from '../../assets/src=http___b-ssl.duitang.com_uploads_item_201606_29_20160629115130_tsfrS.jpeg&refer=http___b-ssl.duitang.jpeg'
 import styles from './index.less'
 
 class Logo extends React.Component{

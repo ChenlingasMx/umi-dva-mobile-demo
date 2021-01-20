@@ -1,17 +1,18 @@
 import React from 'react';
 import { connect } from 'dva';
 import { List, InputItem, WingBlank, WhiteSpace, Button } from 'antd-mobile';
-import router from 'umi/router';
 import Logo from './logo'
 import styles from './index.less'
 
 @connect(({ login }) => ({ login }))
 class LoginNew extends React.Component {
   sumbit = () => {
-    router.push('/home')
+    this.props.dispatch({
+      type: "login/login"
+    })
   }
   onChange = (type, value) => {
-    const { login: { loginForm,loginError } } = this.props
+    const { login: { loginForm, loginError } } = this.props
     if (type === 'username') {
       this.props.dispatch({
         type: "login/updateData",
@@ -20,9 +21,9 @@ class LoginNew extends React.Component {
             ...loginForm,
             username: value
           },
-          loginError:{
+          loginError: {
             ...loginError,
-            usernameError:value.replace(/\s/g, '').length <10
+            usernameError: value.replace(/\s/g, '').length < 10
           }
         }
       })
@@ -35,9 +36,9 @@ class LoginNew extends React.Component {
             ...loginForm,
             password: value
           },
-          loginError:{
+          loginError: {
             ...loginError,
-            passwordError:value.replace(/\s/g, '').length <12&&value.replace(/\s/g, '').length>6
+            passwordError: value.replace(/\s/g, '').length < 12 && value.replace(/\s/g, '').length > 6
           }
         }
       })
@@ -63,16 +64,18 @@ class LoginNew extends React.Component {
       onChange: this.onChange.bind(this, 'password')
     }
     return (
-      <div>
-        <WingBlank>
-          <Logo />
-          <List>
-            <InputItem value={username} {...userNameProps} >userName:</InputItem>
-            <InputItem type="password" value={password} {...passwordProps}>passWord:</InputItem>
-          </List>
-          <WhiteSpace />
-          <Button type="primary" onClick={this.sumbit.bind(this)} className={styles.login_button}>Login</Button>
-        </WingBlank>
+      <div className={styles.bg_img}>
+        <div style={{ padding: 10 }}>
+          <WingBlank style={{ zIndex: 999 }}>
+            <Logo />
+            <List>
+              <InputItem value={username} {...userNameProps} >userName:</InputItem>
+              <InputItem type="password" value={password} {...passwordProps}>passWord:</InputItem>
+            </List>
+            <WhiteSpace />
+            <Button onClick={this.sumbit.bind(this)} className={styles.login_button}>Login</Button>
+          </WingBlank>
+        </div>
       </div>
     );
   }

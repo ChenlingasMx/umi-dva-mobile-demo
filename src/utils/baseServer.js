@@ -1,4 +1,4 @@
-export const baseUrl = window.location.origin + '/';
+export const baseUrl = window.location.origin;
 
 
 export const setFormData = (obj) => {

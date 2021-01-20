@@ -1,4 +1,4 @@
-import fetch from 'dva';
+import fetch from 'dva/fetch';
 import { Toast } from 'antd-mobile';
 import { setUrlEncoded } from './baseServer';
 import { getToken, setToken } from './token';
@@ -47,13 +47,13 @@ function request(url, options) {
   };
   const newOptions = { ...defaultOptions, ...options };
   // body 添加token
-  if (newOptions.body) {
-    newOptions.body.__token__ = getToken();
-  } else {
-    newOptions.body = {
-      __token__: getToken(),
-    };
-  }
+  // if (newOptions.body) {
+  //   newOptions.body.__token__ = getToken();
+  // } else {
+  //   newOptions.body = {
+  //     __token__: getToken(),
+  //   };
+  // }
   let new_url;
   if (
     newOptions.method === 'POST' ||
@@ -87,7 +87,6 @@ function request(url, options) {
     new_url = url + '?' + setUrlEncoded(newOptions.body)
     delete newOptions.body
   }
-
   return fetch(new_url, newOptions)
     .then(checkStatus)
     .then((response) => {
