@@ -11,9 +11,9 @@ export const TabBarData=[
       },
       {
         id: 'classify',
-        name: '分类',
-        icon: require('images/recycleH5_03.png'),
-        selectedicon: require('images/recycleH5_06.png'),
+        name: '通讯录',
+        icon: require('../assets/chat.png'),
+        selectedicon: require('../assets/selectedChat.png'),
         url: '/classify',
       },
       {
