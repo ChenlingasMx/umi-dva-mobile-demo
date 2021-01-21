@@ -1,16 +1,19 @@
-import React, { Component } from 'react'
-import { List } from 'antd-mobile'
+import React, { useEffect, useState } from 'react'
+import { List, SearchBar, WhiteSpace } from 'antd-mobile'
 import { connect } from 'dva';
 import styles from './index.less'
-@connect(({ classify }) => ({ classify }))
+import Scroll from 'react-scroll-mobile'
 
-class ClassPage extends Component {
-  componentDidMount() {
-    this.handleList()
-  }
+const ClassPage = ({
+  dispatch,
+  classify: { logs, currentIndex, HOT_NAME, HOT_SINGER_LEN, list }
+}) => {
+  const [status, setStatus] = useState(false)
+  useEffect(() => {
+    handleList()
+  }, [])
 
-  handleList = () => {
-    const { classify: { HOT_NAME, HOT_SINGER_LEN, list } } = this.props
+  const handleList = () => {
     //歌手列表渲染
     let map = {
       hot: {
@@ -51,59 +54,72 @@ class ClassPage extends Component {
     ret.sort((a, b) => {
       return a.title.charCodeAt(0) - b.title.charCodeAt(0)
     })
-    return this.props.dispatch({
+    return dispatch({
       type: 'classify/updateData',
       payload: {
         logs: hot.concat(ret)
       }
     })
   }
-
+  // 模拟请求数据
+  const timeout = delay => new Promise(resolve => setTimeout(resolve, delay));
   // 遍历通讯录列表
-  renderList = () => {
-    const { classify: { list } } = this.props
+  const renderList = () => {
     let items = (
       <>
-        {
-          list.map((itm, index) => (
-            <div key={index}>
-              <div style={{ paddingLeft: 15, fontWeight: 500, fontFamily: "cursive", background: "#F5F5F5" }} >{itm.index}</div>
-              {itm.children.map((val,index)=>(
-                 <List>
-                    <List.Item
-                      thumb={<img src={val.img} alt="" className={styles.headImage} />}
-                      arrow="horizontal"
-                      onClick={() => { }}
-                      key={val.id}
-                    >
-                      {val.name}
-                    </List.Item>
-                  </List>
-              ))}
-            </div>
-          ))
-        }
+        <Scroll
+          noMore={status}
+          backTop
+          pullDownRefresh={async () => {
+            setStatus(true)
+            await timeout(1000);
+            setStatus(false)
+          }}
+          pullUpLoad={() => { }}
+        >
+          {/* 搜索栏 */}
+          <SearchBar placeholder="" maxLength={8} />
+          {/* 通讯栏 */}
+          {
+            list.map((itm, index) => (
+              <div key={index} >
+                <div style={{ paddingLeft: 15, fontWeight: 500, fontFamily: "cursive", background: "#F5F5F5" }} >{itm.index}</div>
+                {itm.children.map((val, index) => (
+                  <List.Item
+                    key={index}
+                    thumb={<img src={val.img} alt="" className={styles.headImage} />}
+                    arrow="horizontal"
+                    onClick={() => { }}
+                  >
+                    {val.name}
+                  </List.Item>
+                ))}
+              </div>
+            ))
+          }
+        </Scroll>
       </>
     )
     return items
   }
 
-  render() {
-    const { classify: { logs, currentIndex } } = this.props
-    return (
-      <div className={styles.log_list}>
-        {this.renderList()}
-        {/* 侧边字母导航 */}
-        <div className={styles.list_shortcut}>
-          {
-            logs.map((item, index) => (
-              <div className={currentIndex === index ? styles.current : null} key={index} >{item.title}</div>
-            ))
-          }
-        </div>
+
+  return (
+    <div className={styles.log_list}>
+      {/* 通讯+搜索 */}
+      {renderList()}
+      {/* 侧边字母导航 */}
+      <div className={styles.list_shortcut}>
+        {
+          logs.map((item, index) => (
+            <div className={currentIndex === index ? styles.current : null} key={index} >{item.title}</div>
+          ))
+        }
       </div>
-    )
-  }
+    </div>
+  )
 }
 
-export default ClassPage;
+export default connect(state => ({
+  classify: state.classify,
+}))(ClassPage)
