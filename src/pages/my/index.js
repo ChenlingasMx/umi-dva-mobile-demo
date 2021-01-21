@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'dva';
-import router from 'umi/router';
+import { WhiteSpace } from 'antd-mobile';
 import HomeMyCard from '../../components/HomeMyCard/HomeMyCard'
-
+import HomeList from '../../components/HomeList/HomeList'
 @connect(({ my }) => ({ my }))
 class MyIndex extends Component {
   constructor(props) {
@@ -14,8 +14,10 @@ class MyIndex extends Component {
   }
   render() {
     return (
-      <div>
-       <HomeMyCard />
+      <div style={{ background: '#F5F5F5', width: '100%', height: '100%' }}>
+        <HomeMyCard />
+        <WhiteSpace size="xl" />
+        <HomeList />
       </div>
     )
   }

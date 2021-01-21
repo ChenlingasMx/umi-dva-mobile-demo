@@ -10,7 +10,7 @@ class BaseLayout extends React.Component {
 
   isTabBarSelect = (url) => {
     const {location: {pathname}} = this.props;
-    if (pathname == '/' && url == '/home') {
+    if (pathname === '/' && url === '/home') {
       return true;
     } else {
       return pathname === url;
@@ -21,7 +21,7 @@ class BaseLayout extends React.Component {
       <div className={styles.baseLayout}>
       <TabBar
         unselectedTintColor="#333"
-        tintColor="#ef5f55"
+        tintColor="#3CB371"
         barTintColor="white"
         tabBarPosition='bottom'
       >

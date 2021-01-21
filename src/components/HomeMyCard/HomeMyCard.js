@@ -4,20 +4,21 @@ import router from 'umi/router';
 import { Card, Flex, Icon } from 'antd-mobile';
 import styles from './index.less'
 const HomeMyCard = ({
-  my: { headImage }
+  my: { headImage },
+  login:{adminInfo}
 }) => {
   return (
     <div>
       <Card full>
-        <Card.Body style={{ padding: 20 }}>
+        <Card.Body style={{ paddingTop:30,paddingRight:20,paddingLeft:20,paddingBottom:30 }}>
           <Flex justify="around">
             {/* 左侧头像 */}
             <Flex.Item>
               <div style={{ display: 'flex', flexDirection: 'row' }}>
                 <img className={styles.head_logo} src={headImage} alt="" />
                 <div>
-                  <div className={styles.real_name}>宋哈娜</div>
-                  <div className={styles.en_name}>EnName:dva</div>
+                  <div className={styles.real_name}>{adminInfo&&adminInfo.name&&adminInfo.name||'ღ'}</div>
+                  <div className={styles.en_name}>微信号:{adminInfo&&adminInfo.enName&&adminInfo.enName||'micomxx'}</div>
                 </div>
               </div>
             </Flex.Item>
@@ -38,4 +39,5 @@ const HomeMyCard = ({
 }
 export default connect(state => ({
   my: state.my,
+  login:state.login
 }))(HomeMyCard)

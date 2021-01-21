@@ -19,8 +19,8 @@ export const TabBarData=[
       {
         id: 'my',
         name: '我的',
-        icon: require('images/recycleH5_04.png'),
-        selectedicon: require('images/recycleH5_05.png'),
+        icon: require('../assets/my.png'),
+        selectedicon: require('../assets/selectedMy.png'),
         url: '/my',
       }
 ];

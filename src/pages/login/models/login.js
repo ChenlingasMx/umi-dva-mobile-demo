@@ -10,7 +10,8 @@ export default {
     loginError: {
       usernameError: false,
       passwordError: false
-    }
+    },
+    adminInfo:{}
   },
   effects: {
     *login({ payload }, { call, put, select }) {
@@ -19,7 +20,15 @@ export default {
       }));
       const data = yield call(login, params)
       if(data.code===1){
-         router.push('/home')
+        yield put ({
+          type:"updateData",
+          payload:{
+            adminInfo:data.data
+          }
+        })
+        router.push('/home')
+      }else{
+        router.replace('/login')
       }
     }
   },
