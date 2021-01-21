@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'dva';
 import router from 'umi/router';
+import HomeMyCard from '../../components/HomeMyCard/HomeMyCard'
 
 @connect(({ my }) => ({ my }))
 class MyIndex extends Component {
@@ -13,8 +14,8 @@ class MyIndex extends Component {
   }
   render() {
     return (
-      <div onClick={()=>router.push('/login')} >
-        登陆/注册
+      <div>
+       <HomeMyCard />
       </div>
     )
   }
