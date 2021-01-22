@@ -10,11 +10,11 @@ export const TabBarData=[
         url: '/home',
       },
       {
-        id: 'classify',
+        id: 'chat',
         name: '通讯录',
         icon: require('../assets/chat.png'),
         selectedicon: require('../assets/selectedChat.png'),
-        url: '/classify',
+        url: '/chat',
       },
       {
         id: 'my',

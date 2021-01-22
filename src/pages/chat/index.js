@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { List, SearchBar, WhiteSpace } from 'antd-mobile'
+import React, { useEffect } from 'react'
+import { List, SearchBar, SwipeAction } from 'antd-mobile'
 import { connect } from 'dva';
 import styles from './index.less'
 import Scroll from 'react-scroll-mobile'
@@ -7,12 +7,12 @@ import head1 from '@/assets/WechatIMG34.jpeg'
 
 const ClassPage = ({
   dispatch,
-  classify: { logs, currentIndex, HOT_NAME, HOT_SINGER_LEN, list ,page },
+  chat: { logs, currentIndex, HOT_NAME, HOT_SINGER_LEN, list, page },
   loading
 }) => {
   useEffect(() => {
     dispatch({
-      type: "classify/selectChatPage"
+      type: "chat/selectChatPage"
     })
     handleList()
   }, [])
@@ -59,7 +59,7 @@ const ClassPage = ({
       return a.title.charCodeAt(0) - b.title.charCodeAt(0)
     })
     return dispatch({
-      type: 'classify/updateData',
+      type: 'chat/updateData',
       payload: {
         logs: hot.concat(ret)
       }
@@ -71,28 +71,28 @@ const ClassPage = ({
     let items = (
       <>
         <Scroll
-          noMore={loading.effects['classify/selectChatPage']}
+          noMore={loading.effects['chat/selectChatPage']}
           backTop
           pullDownRefresh={async () => {
             dispatch({
-              type:"classify/updateData",
-              payload:{
-                page:1
+              type: "chat/updateData",
+              payload: {
+                page: 1
               }
             })
             dispatch({
-              type: "classify/selectChatPage"
+              type: "chat/selectChatPage"
             })
           }}
           pullUpLoad={() => {
             dispatch({
-              type:"classify/updateData",
-              payload:{
-                page:page+1
+              type: "chat/updateData",
+              payload: {
+                page: page + 1
               }
             })
             dispatch({
-              type: "classify/selectChatPage"
+              type: "chat/selectChatPage"
             })
           }}
         >
@@ -100,24 +100,42 @@ const ClassPage = ({
           <SearchBar placeholder="" maxLength={8} />
           {/* 通讯栏 */}
           {
-            list.map((itm, index) => {
-              return (
-                <div key={index} >
-                  <div style={{ paddingLeft: 15, fontWeight: 500, fontFamily: "cursive", background: "#F5F5F5" }} >{itm.index}</div>
-                  {itm.children.map((val, index) => (
-                      <List.Item
-                        key={index}
-                        thumb={<img src={head1} alt="" className={styles.headImage} />}
-                        arrow="horizontal"
-                        onClick={() => { }}
-                      >
-                        {val.name}
-                      </List.Item>
-                    )
-                  )}
-                </div>
-              )
-            })
+            list.map((itm, index) => (
+              <div key={index} >
+                <div style={{ paddingLeft: 15, fontWeight: 500, fontFamily: "cursive", background: "#F5F5F5" }} >{itm.index}</div>
+                {itm.children.map((val, index) => (
+                  <SwipeAction
+                    style={{ backgroundColor: 'gray' }}
+                    autoClose
+                    right={[
+                      {
+                        text: '备注',
+                        onPress: () =>{ },
+                        style: { backgroundColor: '#ddd', color: 'white' },
+                      },
+                      {
+                        text: '删除',
+                        onPress: () => { },
+                        style: { backgroundColor: '#F4333C', color: 'white' },
+                      },
+                    ]}
+                    onOpen={() => console.log('global open')}
+                    onClose={() => console.log('global close')}
+                  >
+                    <List.Item
+                      key={index}
+                      thumb={<img src={head1} alt="" className={styles.headImage} />}
+                      arrow="horizontal"
+                      onClick={() => { }}
+                    >
+                      {val.name}
+                    </List.Item>
+                  </SwipeAction>
+                )
+                )}
+              </div>
+            )
+            )
           }
         </Scroll>
       </>
@@ -143,6 +161,6 @@ const ClassPage = ({
 }
 
 export default connect(state => ({
-  classify: state.classify,
+  chat: state.chat,
   loading: state.loading,
 }))(ClassPage)

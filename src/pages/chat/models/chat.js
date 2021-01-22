@@ -1,12 +1,6 @@
-
-import head1 from '../../../assets/headImage/WechatIMG37.jpeg'
-import head2 from '../../../assets/headImage/WechatIMG38.jpeg'
-import head3 from '../../../assets/headImage/WechatIMG39.jpeg'
-import head4 from '../../../assets/headImage/WechatIMG40.jpeg'
-import head5 from '../../../assets/headImage/WechatIMG41.jpeg'
 import {selectChatPage} from '../../../services/chatList'
 export default {
-  namespace: 'classify',
+  namespace: 'chat',
   state: {
     logs: [],
     HOT_NAME: '❤️',
@@ -18,12 +12,12 @@ export default {
   },
   effects: {
     *selectChatPage({ payload }, { call, put, select }) {
-      const params = yield select(({ classify }) => ({
-        page:classify.page,
-        pageSize:classify.pageSize
+      const params = yield select(({ chat }) => ({
+        page:chat.page,
+        pageSize:chat.pageSize
       }));
-      const sourcelist = yield select(({classify})=>({
-        list:classify.list
+      const sourcelist = yield select(({chat})=>({
+        list:chat.list
       }));
       const {list} = sourcelist 
       const data = yield call(selectChatPage, params)
