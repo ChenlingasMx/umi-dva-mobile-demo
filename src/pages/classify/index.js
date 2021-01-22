@@ -3,13 +3,17 @@ import { List, SearchBar, WhiteSpace } from 'antd-mobile'
 import { connect } from 'dva';
 import styles from './index.less'
 import Scroll from 'react-scroll-mobile'
+import head1 from '@/assets/WechatIMG34.jpeg'
 
 const ClassPage = ({
   dispatch,
-  classify: { logs, currentIndex, HOT_NAME, HOT_SINGER_LEN, list }
+  classify: { logs, currentIndex, HOT_NAME, HOT_SINGER_LEN, list ,page },
+  loading
 }) => {
-  const [status, setStatus] = useState(false)
   useEffect(() => {
+    dispatch({
+      type: "classify/selectChatPage"
+    })
     handleList()
   }, [])
 
@@ -61,41 +65,59 @@ const ClassPage = ({
       }
     })
   }
-  // 模拟请求数据
-  const timeout = delay => new Promise(resolve => setTimeout(resolve, delay));
+
   // 遍历通讯录列表
   const renderList = () => {
     let items = (
       <>
         <Scroll
-          noMore={status}
+          noMore={loading.effects['classify/selectChatPage']}
           backTop
           pullDownRefresh={async () => {
-            setStatus(true)
-            await timeout(1000);
-            setStatus(false)
+            dispatch({
+              type:"classify/updateData",
+              payload:{
+                page:1
+              }
+            })
+            dispatch({
+              type: "classify/selectChatPage"
+            })
           }}
-          pullUpLoad={() => { }}
+          pullUpLoad={() => {
+            dispatch({
+              type:"classify/updateData",
+              payload:{
+                page:page+1
+              }
+            })
+            dispatch({
+              type: "classify/selectChatPage"
+            })
+          }}
         >
           {/* 搜索栏 */}
           <SearchBar placeholder="" maxLength={8} />
           {/* 通讯栏 */}
           {
-            list.map((itm, index) => (
-              <div key={index} >
-                <div style={{ paddingLeft: 15, fontWeight: 500, fontFamily: "cursive", background: "#F5F5F5" }} >{itm.index}</div>
-                {itm.children.map((val, index) => (
-                  <List.Item
-                    key={index}
-                    thumb={<img src={val.img} alt="" className={styles.headImage} />}
-                    arrow="horizontal"
-                    onClick={() => { }}
-                  >
-                    {val.name}
-                  </List.Item>
-                ))}
-              </div>
-            ))
+            list.map((itm, index) => {
+              return (
+                <div key={index} >
+                  <div style={{ paddingLeft: 15, fontWeight: 500, fontFamily: "cursive", background: "#F5F5F5" }} >{itm.index}</div>
+                  {itm.children.map((val, index) => (
+                      <List.Item
+                        key={index}
+                        thumb={<img src={head1} alt="" className={styles.headImage} />}
+                        arrow="horizontal"
+                        onClick={() => { }}
+                      >
+                        {val.name}
+                      </List.Item>
+                    )
+                  )}
+                </div>
+              )
+            })
           }
         </Scroll>
       </>
@@ -122,4 +144,5 @@ const ClassPage = ({
 
 export default connect(state => ({
   classify: state.classify,
+  loading: state.loading,
 }))(ClassPage)
