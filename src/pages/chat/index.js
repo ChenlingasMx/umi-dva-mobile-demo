@@ -106,6 +106,7 @@ const ClassPage = ({
                 {itm.children.map((val, index) => (
                   <SwipeAction
                     style={{ backgroundColor: 'gray' }}
+                    key={index}
                     autoClose
                     right={[
                       {
@@ -115,7 +116,7 @@ const ClassPage = ({
                       },
                       {
                         text: '删除',
-                        onPress: () => { },
+                        onPress: () => {},
                         style: { backgroundColor: '#F4333C', color: 'white' },
                       },
                     ]}
@@ -126,7 +127,7 @@ const ClassPage = ({
                       key={index}
                       thumb={<img src={head1} alt="" className={styles.headImage} />}
                       arrow="horizontal"
-                      onClick={() => { }}
+                      onClick={() => {}}
                     >
                       {val.name}
                     </List.Item>

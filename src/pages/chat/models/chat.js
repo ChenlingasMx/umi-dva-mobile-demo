@@ -8,7 +8,7 @@ export default {
     currentIndex: 0,
     list: [],
     page:1,
-    pageSize:10,
+    pageSize:5,
   },
   effects: {
     *selectChatPage({ payload }, { call, put, select }) {

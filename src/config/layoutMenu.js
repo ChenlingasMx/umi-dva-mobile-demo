@@ -5,8 +5,8 @@ export const TabBarData=[
     {
         id: 'home',
         name: '首页',
-        icon: require('images/recycleH5_07.png'),
-        selectedicon: require('images/recycleH5_02.png'),
+        icon: require('../assets/friend.png'),
+        selectedicon: require('../assets/selectedFrieng.png'),
         url: '/home',
       },
       {
