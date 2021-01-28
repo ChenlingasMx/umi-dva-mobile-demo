@@ -4,6 +4,7 @@ import { connect } from 'dva';
 import styles from './index.less'
 import Scroll from 'react-scroll-mobile'
 import head1 from '@/assets/WechatIMG34.jpeg'
+import router from 'umi/router';
 
 const ClassPage = ({
   dispatch,
@@ -127,7 +128,7 @@ const ClassPage = ({
                       key={index}
                       thumb={<img src={head1} alt="" className={styles.headImage} />}
                       arrow="horizontal"
-                      onClick={() => {}}
+                      onClick={() => {router.push('/detail');}}
                     >
                       {val.name}
                     </List.Item>
