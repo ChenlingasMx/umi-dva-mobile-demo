@@ -31,13 +31,13 @@ class Moments extends Component {
   render() {
     const { visible, previewImage, current, transStyle } = this.state
     return (
-      <div style={{ flex: 1, height: "100%", width: "100%", background: "#fff" }}>
+      <div style={{ flex: 1, height: "100%", width: "100%", background: "#fff",position:"absolute" }}>
         {/* 朋友圈背景 */}
         <img src={backgroud} alt="" className={styles.backgroud_image} />
         {/* 头像-名字 */}
-        <div style={{ display: "flex", flexDirection: "row", alignItems: "center", position: "absolute", top: "34.5%", right: 10, zIndex: 99 }}>
-          <div className={styles.name_font}>Sweetheart❤恋人</div>
-          <img alt="" src={headImage} className={styles.head_Image} />
+        <div style={{position:'absolute',top:"34.5%",right:10,zIndex:99}}>
+          <span className={styles.name_font}>Sweetheart❤恋人</span>
+          <span><img alt="" src={headImage} className={styles.head_Image} /></span>
         </div>
         {/* 列表 */}
         <Card>
