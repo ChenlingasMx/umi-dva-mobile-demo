@@ -17,6 +17,13 @@ export const TabBarData=[
         url: '/chat',
       },
       {
+        id: 'moments',
+        name: '发现',
+        icon: require('../assets/search.png'),
+        selectedicon: require('../assets/selectedSearch.png'),
+        url: '/moments',
+      },
+      {
         id: 'my',
         name: '我的',
         icon: require('../assets/my.png'),
