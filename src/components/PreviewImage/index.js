@@ -32,12 +32,6 @@ class PreviewImage extends Component {
           closable
           visible={visible}
           maskClosable={true}
-          footer={[
-            {
-              text: '旋转',
-              onPress:this.translate.bind(this)
-            }
-          ]}
           onClose={this.cancelPreview.bind(this)}
           className={styles.modal_card}
         >
