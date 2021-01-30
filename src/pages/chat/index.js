@@ -112,26 +112,28 @@ const ClassPage = ({
                     right={[
                       {
                         text: '备注',
-                        onPress: () =>{ },
+                        onPress: () => { },
                         style: { backgroundColor: '#ddd', color: 'white' },
                       },
                       {
                         text: '删除',
-                        onPress: () => {},
+                        onPress: () => { },
                         style: { backgroundColor: '#F4333C', color: 'white' },
                       },
                     ]}
                     onOpen={() => console.log('global open')}
                     onClose={() => console.log('global close')}
                   >
-                    <List.Item
-                      key={index}
-                      thumb={<img src={head1} alt="" className={styles.headImage} />}
-                      arrow="horizontal"
-                      onClick={() => {router.push('/detail');}}
-                    >
-                      {val.name}
-                    </List.Item>
+                    <List key={index} className={styles.list_item} >
+                      <List.Item
+                        thumb={<img src={head1} alt="" className={styles.headImage} />}
+                        arrow="horizontal"
+                        onClick={() => { router.push('/detail') }}
+                        style={{padding:10}}    
+                      >
+                        {val.name}
+                      </List.Item>
+                    </List>
                   </SwipeAction>
                 )
                 )}

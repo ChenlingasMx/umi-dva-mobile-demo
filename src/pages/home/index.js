@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { Card, SearchBar, NoticeBar } from 'antd-mobile'
+import { Card, SearchBar } from 'antd-mobile'
 import styles from './index.less'
 import head from '../../assets/WechatIMG34.jpeg'
 import head2 from '../../assets/headImage/WechatIMG37.jpeg'
@@ -35,10 +35,6 @@ class Home extends Component {
       <div style={{ flex: 1, height: "100%", width: "100%", background: "#F5F5F5", paddingLeft: 20, paddingRight: 20 }}>
         {/* 搜索栏 */}
         <SearchBar placeholder="" maxLength={8} />
-        {/* 通告栏 */}
-        <NoticeBar mode="link" >
-          Notice: Welcome to ❤ haven ～～～～～～～～～～～～～～～～～～～～!!!!!!!!~~~~~~~love you forever~
-        </NoticeBar>
         {/* 卡片 */}
         {this.state.imgList.map((itm, index) => (
           <Card style={{ marginBottom: 20 }} key={index}>
