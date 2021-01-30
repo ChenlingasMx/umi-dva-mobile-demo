@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'dva';
 import { List } from 'antd-mobile';
+import router from 'umi/router';
 const HomeList = ({
   my: { homeList }
 }) => {
@@ -12,7 +13,11 @@ const HomeList = ({
           arrow="horizontal"
           thumb={<img src={itm.img} alt="" />}
           multipleLine
-          onClick={() => { }}
+          onClick={() => { 
+            if(itm.title==='支付'){
+              router.push('/pay')
+            }
+          }}
           style={{ paddingLeft: 20, paddingRight: 20 }}
         >
           {itm.title}
