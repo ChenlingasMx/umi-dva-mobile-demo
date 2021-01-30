@@ -34,12 +34,10 @@ class Detail extends Component {
         {/* 导航栏 */}
         <NavBar mode="dark" icon={<Icon type="left" />} onLeftClick={() => router.goBack()}
           rightContent={[
-            <Icon key="1" type="ellipsis" onClick={()=>{ }} />,
+            <Icon key="1" type="ellipsis" onClick={() => { }} />,
           ]}
-          style={{background:"#F5F5F5",color:"black"}}
-        >
-          {props.nickName}
-        </NavBar>
+          style={{ background: "#F5F5F5", color: "black" }}
+        />
         {/* 个人信息卡片 */}
         <HeadCard {...props} />
         {/* 列表 */}
@@ -50,7 +48,7 @@ class Detail extends Component {
         <WhiteSpace size="lg" />
         <Card>
           <Card.Body style={{ paddingTop: 20, paddingRight: 20, paddingLeft: 20, paddingBottom: 20 }}>
-            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }} onClick={() => router.push("/detailMoments")} >
               <div className={styles.real_name}>朋友圈</div>
               <img className={styles.head_logo} src={headImage} alt="" />
               <img className={styles.head_logo} src={friends} alt="" />

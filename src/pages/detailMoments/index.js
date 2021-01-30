@@ -2,15 +2,15 @@ import React, { Component } from 'react'
 import { connect } from 'dva';
 import styles from './index.less'
 import Scroll from 'react-scroll-mobile'
-import { Card } from 'antd-mobile'
+import { NavBar, Icon } from 'antd-mobile'
+import router from 'umi/router';
 import backgroud from '../../assets/headImage/WechatIMG1.jpeg'
 import headImage from '../../assets/WechatIMG34.jpeg'
 import headImage2 from '../../assets/headImage/WechatIMG37.jpeg'
 import headImage3 from '../../assets/headImage/WechatIMG38.jpeg'
-import set from '../../assets/更多,三个点.png'
 import PreviewImage from '../../components/PreviewImage/index'
-@connect(({ moments }) => ({ moments }))
-class Moments extends Component {
+@connect(({ detailMoments }) => ({ detailMoments }))
+class DetailMoments extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,53 +22,46 @@ class Moments extends Component {
   }
   componentDidMount() {
   }
-
   preview = (src) => {
     this.setState({
       visible: true,
       previewImage: src
     })
   }
-
-  renderMomentsList = () => {
-    const { moments: { dataSource } } = this.props
-    return (
-      dataSource.map(itm => (
-        <Card key={itm.id}>
-          <Card.Body>
-            <div style={{ display: "flex", flexDirection: "row" }}>
-              {/* 头像 */}
-              <img alt="" src={headImage2} className={styles.head_Image} />
-              <div style={{ marginLeft: 10, width: "100%" }}>
-                {/* 名字 */}
-                <div className={styles.moments_font}>{itm.name}</div>
-                {/* 内容 */}
-                <div style={{ wordBreak: "break-all", width: "100%" }}>{itm.content}</div>
-                {/* 图片 */}
-                <div style={{ display: "flex", flexWrap: "wrap", flexDirection: 'row', width: "60%" }}>
+  renderChartsMomentsList = () => {
+    const { detailMoments: { chartsData } } = this.props
+    let content = chartsData.map(itm => {
+      return (
+        <div style={{ marginTop: 30, padding: 10 }} key={itm.id}>
+          <div style={{ fontFamily: "cursive", fontWeight: "bolder", fontSize: 28, marginBottom: 20 }}>{`${itm.year}年`}</div>
+          {itm.children.map(item => {
+            return (
+              <div style={{ display: "flex", flexDirection: "row", justifyContent: "flex-start", marginBottom: 20 }} key={item.id}>
+                {/* 日期 */}
+                <div>
+                  <span style={{ fontFamily: "cursive", fontWeight: "bolder", fontSize: 20 }}>{item.day}</span>
+                  <span style={{ fontFamily: "cursive", fontWeight: 400, fontSize: 14 }}>{item.year}</span>
+                </div>
+                {/* 照片 */}
+                <div style={{ marginLeft: 10, width: 110, wordBreak: "break-all" }}>
                   <img alt="" src={headImage} className={styles.head_Image} style={{ marginRight: 5, marginBottom: 5 }} onClick={this.preview.bind(this, headImage)} />
                   <img alt="" src={headImage2} className={styles.head_Image} style={{ marginRight: 5, marginBottom: 5 }} onClick={this.preview.bind(this, headImage2)} />
                   <img alt="" src={headImage3} className={styles.head_Image} style={{ marginRight: 5, marginBottom: 5 }} onClick={this.preview.bind(this, headImage3)} />
                   <img alt="" src={headImage2} className={styles.head_Image} style={{ marginRight: 5, marginBottom: 5 }} onClick={this.preview.bind(this, headImage2)} />
                 </div>
-                {/* 底部 */}
-                <div style={{ marginTop: 5, display: "flex", justifyContent: "space-between", width: "100%" }}>
-                  <div style={{ color: "#A9A9A9" }}>{`${itm.hours}小时`}</div>
-                  <img alt="" src={set} style={{ width: 20, height: 20 }} />
-                </div>
-                {/* 留言 */}
-                <div className={styles.remark_container}>
-                  <span className={styles.remark_font}>{`${itm.nickName}:`}</span>
-                  <span style={{ marginLeft: 5 }}>{itm.content}</span>
+                <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                  <div>{item.content}</div>
+                  <div style={{ fontSize: 12, color: "#A9A9A9" }}>{'共四张'}</div>
                 </div>
               </div>
-            </div>
-          </Card.Body>
-        </Card>
-      ))
-    )
+            )
+          }
+          )}
+        </div>
+      )
+    })
+    return content
   }
- 
   render() {
     const { visible, previewImage, current, transStyle } = this.state
     return (
@@ -79,15 +72,23 @@ class Moments extends Component {
           pullDownRefresh={async () => { }}
           pullUpLoad={() => { }}
         >
+          {/* 导航栏 */}
+          <NavBar mode="dark" icon={<Icon type="left" />} onLeftClick={() => router.goBack()}
+            rightContent={[
+              <Icon key="1" type="ellipsis" onClick={() => { }} />,
+            ]}
+            style={{ background: "#F5F5F5", color: "black" }}
+          />
           {/* 朋友圈背景 */}
           <img src={backgroud} alt="" className={styles.backgroud_image} />
           {/* 头像-名字 */}
-          <div style={{ position: 'absolute', top: "36.5%", right: 10, zIndex: 99 }}>
+          <div style={{ position: 'absolute', top: "46.5%", right: 10, zIndex: 99 }}>
             <span className={styles.name_font}>Sweetheart❤恋人</span>
             <span><img alt="" src={headImage} className={styles.head_Image} /></span>
+            <div style={{position:"absolute",right:0,marginTop:10}}>{`糕糕一只桃心丸❤️`}</div>
           </div>
           {/* 列表 */}
-          { this.renderMomentsList() }
+          {this.renderChartsMomentsList()}
         </Scroll>
         <PreviewImage
           visible={visible}
@@ -107,4 +108,4 @@ class Moments extends Component {
     )
   }
 }
-export default Moments;
+export default DetailMoments;
