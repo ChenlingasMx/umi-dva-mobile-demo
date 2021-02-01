@@ -4,9 +4,9 @@
 export const TabBarData=[
     {
         id: 'home',
-        name: '首页',
-        icon: require('../assets/friend.png'),
-        selectedicon: require('../assets/selectedFrieng.png'),
+        name: '聊天',
+        icon: require('../assets/聊天 (2).png'),
+        selectedicon: require('../assets/聊天 (3).png'),
         url: '/home',
       },
       {
@@ -21,7 +21,7 @@ export const TabBarData=[
         name: '发现',
         icon: require('../assets/search.png'),
         selectedicon: require('../assets/selectedSearch.png'),
-        url: '/moments',
+        url: '/search',
       },
       {
         id: 'my',

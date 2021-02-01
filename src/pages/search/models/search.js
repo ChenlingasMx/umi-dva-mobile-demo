@@ -1,6 +1,5 @@
-
 export default {
-  namespace: 'home',
+  namespace: 'search',
   state: {
   },
   effects: {
@@ -9,5 +8,5 @@ export default {
     updateData(state, { payload }) {
       return { ...state, ...payload };
     },
-  },
+  }
 };

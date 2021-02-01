@@ -1,62 +1,75 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { Card, SearchBar } from 'antd-mobile'
+import { List, SearchBar } from 'antd-mobile'
 import styles from './index.less'
 import head from '../../assets/WechatIMG34.jpeg'
 import head2 from '../../assets/headImage/WechatIMG37.jpeg'
-import sex from '../../assets/女.png'
-import chat from '../../assets/聊天 (1).png'
+import head3 from '../../assets/headImage/WechatIMG48.jpeg'
+import head4 from '../../assets/headImage/WechatIMG47.jpeg'
 @connect(({ home, login }) => ({ home, login }))
 class Home extends Component {
   state = {
-    imgList: [head, head2]
+    imgList: [
+      {
+        img:head,
+        name:"Sweetheart❤恋人"
+      },
+      {
+        img:head2,
+        name:"🌞"
+      },
+      {
+        img:head3,
+        name:"🌛"
+      },
+      {
+        img:head4,
+        name:"✨"
+      },
+      {
+        img:head2,
+        name:"🌟"
+      },
+      {
+        img:head,
+        name:"Sweet"
+      },
+      {
+        img:head2,
+        name:"Heart"
+      },
+      {
+        img:head3,
+        name:"Love"
+      },
+      {
+        img:head4,
+        name:"❤️"
+      },
+      {
+        img:head2,
+        name:"🌟"
+      },
+    ]
   }
-  CardBody = () => {
-    return (
-      <>
-        <div>
-          <span style={{ paddingRight: 10 }} className={styles.en_name} >备 注</span>
-          <span className={styles.font_color}>Sweetheart❤恋人</span>
-        </div>
-        <div style={{ paddingTop: 10 }}>
-          <span style={{ paddingRight: 10 }} className={styles.en_name} >地 区</span>
-          <span className={styles.font_color}>江苏 南京</span>
-        </div>
-        <div style={{ paddingTop: 10 }}>
-          <span style={{ paddingRight: 10 }} className={styles.en_name} >来 源</span>
-          <span className={styles.font_color}>通过名片分享添加</span>
-        </div>
-      </>
-    )
-  }
-
   render() {
     return (
-      <div style={{ flex: 1, height: "100%", width: "100%", background: "#F5F5F5", paddingLeft: 20, paddingRight: 20 }}>
+      <div style={{ flex: 1, height: "100%", width: "100%", background: "#F5F5F5" }}>
         {/* 搜索栏 */}
-        <SearchBar placeholder="" maxLength={8} />
+        <SearchBar placeholder="搜索" maxLength={8}  />
         {/* 卡片 */}
         {this.state.imgList.map((itm, index) => (
-          <Card style={{ marginBottom: 20 }} key={index}>
-            <Card.Header
-              style={{ padding: 20 }}
-              title={
-                <div>
-                  <span style={{ fontSize: 20 }}>ღ<img src={sex} alt="" className={styles.sex_icon} /></span>
-                  <div className={styles.en_name}>微信号: micomxx</div>
-                </div>
-              }
-              thumb={<img src={itm} alt="" className={styles.headImage} />}
-            />
-            <Card.Body style={{ padding: 20 }}>
-              {this.CardBody()}
-            </Card.Body>
-            <Card.Footer extra={
+          <List  key={index} className={styles.list_item}>
+            <List.Item
+              thumb={<img src={itm.img} alt="" className={styles.headImage} />}
+              extra={'15:14'}
+            >
               <div>
-                <span><img src={chat} alt="" className={styles.sex_icon} /></span>
+                <span style={{ fontSize: 20 }}>{itm.name}</span>
+                <div className={styles.en_name}>{`我在上班❤️`}</div>
               </div>
-            } />
-          </Card>
+            </List.Item>
+          </List>
         ))}
       </div>
     )
