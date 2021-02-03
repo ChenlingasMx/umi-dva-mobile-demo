@@ -7,6 +7,7 @@ import head2 from '../../assets/headImage/WechatIMG37.jpeg'
 import head3 from '../../assets/headImage/WechatIMG48.jpeg'
 import head4 from '../../assets/headImage/WechatIMG47.jpeg'
 import noise from '../../assets/静音.png'
+import router from 'umi/router';
 @connect(({ home, login }) => ({ home, login }))
 class Home extends Component {
   state = {
@@ -73,7 +74,7 @@ class Home extends Component {
                   {itm.noise&&<img src={itm.noise} alt="" style={{height:15,width:15}} />}
                 </div>
               }
-              onClick={() => { }}
+              onClick={() => { router.push('./chat') }}
             >
               <div>
                 <span style={{ fontSize: 20 }}>{itm.name}</span>

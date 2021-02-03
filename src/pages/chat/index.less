@@ -1,40 +1,46 @@
-.log_list {
-  height: 100%;
-  width: 100%;
+.headImage{
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+}
+.leftd {
   display: flex;
-  flex-direction: column;
-  background-color: #F5F5F5;
+  justify-items:left;
+  padding-left: 10px;
+ }
+
+._speech {
+  margin: 10px 10px;
+  padding: 8px;
+  table-layout: fixed;
+  word-break: break-all;
+  background:		#32CD32;
+  border-radius: 8px;
+}
+._righted{
+  display: flex;
+  justify-content: flex-end;
 }
 
-.list_shortcut {
-  position: fixed;
-  z-index: 30;
-  right: 0;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  transform: translateY(-50%);
-  width: 20px;
-  padding: 20px 0;
-  border-radius: 10px;
-  text-align: center;
-  background: #DCDCDC;
-  font-family: Helvetica;
+.bottom_container{
+  position: absolute;
+  bottom: 0px;
+  height: 60px;
+  width: 100%;
+  background:#F5F5F5;
+  border-top: 1px solid #DCDCDC;
+  padding: 0px 5px;
 }
 
-.current {
-  color: #32CD32 !important;
+.bootom_icon{
+  height:25px;
+  width:25px 
 }
 
-.headImage {
-  border-radius:20%;
-}
-
-.list_item {
-  :global {
-    .am-list-item img {
-      width: 50px;
-      height: 50px;
-      vertical-align: middle;
-    }
-  }
+.bootom_input {
+  background:#fff;
+  width:100%;
+  padding:8px;
+  margin-left:5px;
+  margin-right:5px;
 }

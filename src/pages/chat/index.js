@@ -1,170 +1,53 @@
-import React, { useEffect } from 'react'
-import { List, SearchBar, SwipeAction } from 'antd-mobile'
+import React from 'react'
 import { connect } from 'dva';
 import styles from './index.less'
-import Scroll from 'react-scroll-mobile'
-import head1 from '@/assets/WechatIMG34.jpeg'
+import head1 from '../../assets/WechatIMG34.jpeg'
+import head2 from '../../assets/headImage/WechatIMG1.jpeg'
+import yuyin from '../../assets/语音.png'
+import smile from '../../assets/笑脸.png'
+import { NavBar, Icon } from 'antd-mobile'
 import router from 'umi/router';
-
-const ClassPage = ({
-  dispatch,
-  chat: { logs, currentIndex, HOT_NAME, HOT_SINGER_LEN, list, page },
-  loading
-}) => {
-  useEffect(() => {
-    dispatch({
-      type: "chat/selectChatPage"
-    })
-    handleList()
-  }, [])
-
-  const handleList = () => {
-    //歌手列表渲染
-    let map = {
-      hot: {
-        title: HOT_NAME,
-        items: []
-      }
-    }
-    list.forEach((item, index) => {
-      if (index < HOT_SINGER_LEN) {
-        map.hot.items.push({
-          name: item.name,
-          avatar: item.img
-        })
-      }
-      const key = item.index
-      if (!map[key]) {
-        map[key] = {
-          title: key,
-          items: []
-        }
-      }
-      map[key].items.push({
-        name: item.name,
-        avatar: item.img
-      })
-    })
-    // 为了得到有序列表，我们需要处理 map
-    let ret = []
-    let hot = []
-    for (let key in map) {
-      let val = map[key]
-      if (val.title.match(/[a-zA-Z]/)) {
-        ret.push(val)
-      } else if (val.title === HOT_NAME) {
-        hot.push(val)
-      }
-    }
-    ret.sort((a, b) => {
-      return a.title.charCodeAt(0) - b.title.charCodeAt(0)
-    })
-    return dispatch({
-      type: 'chat/updateData',
-      payload: {
-        logs: hot.concat(ret)
-      }
-    })
-  }
-
-  // 遍历通讯录列表
-  const renderList = () => {
-    let items = (
-      <>
-        <Scroll
-          noMore={loading.effects['chat/selectChatPage']}
-          backTop
-          pullDownRefresh={async () => {
-            dispatch({
-              type: "chat/updateData",
-              payload: {
-                page: 1
-              }
-            })
-            dispatch({
-              type: "chat/selectChatPage"
-            })
-          }}
-          pullUpLoad={() => {
-            dispatch({
-              type: "chat/updateData",
-              payload: {
-                page: page + 1
-              }
-            })
-            dispatch({
-              type: "chat/selectChatPage"
-            })
-          }}
-        >
-          {/* 搜索栏 */}
-          <SearchBar placeholder="" maxLength={8} />
-          {/* 通讯栏 */}
-          {
-            list.map((itm, index) => (
-              <div key={index} >
-                <div style={{ paddingLeft: 15, fontWeight: 500, fontFamily: "cursive", background: "#F5F5F5" }} >{itm.index}</div>
-                {itm.children.map((val, index) => (
-                  <SwipeAction
-                    style={{ backgroundColor: 'gray' }}
-                    key={index}
-                    autoClose
-                    right={[
-                      {
-                        text: '备注',
-                        onPress: () => { },
-                        style: { backgroundColor: '#ddd', color: 'white' },
-                      },
-                      {
-                        text: '删除',
-                        onPress: () => { },
-                        style: { backgroundColor: '#F4333C', color: 'white' },
-                      },
-                    ]}
-                    onOpen={() => console.log('global open')}
-                    onClose={() => console.log('global close')}
-                  >
-                    <List key={index} className={styles.list_item} >
-                      <List.Item
-                        thumb={<img src={head1} alt="" className={styles.headImage} />}
-                        arrow="horizontal"
-                        onClick={() => { router.push('/detail') }}
-                        style={{padding:10}}    
-                      >
-                        {val.name}
-                      </List.Item>
-                    </List>
-                  </SwipeAction>
-                )
-                )}
-              </div>
-            )
-            )
-          }
-        </Scroll>
-      </>
-    )
-    return items
-  }
-
-
+const Chat = () => {
+  const data = [
+    { position: 0, content: '二货，你看你傻样！', time: "10:13" },
+    { position: 1, content: '你才傻' },
+    { position: 0, content: '二货，你看你傻样！' },
+    { position: 1, content: '你才傻' },
+    { position: 0, content: '二货，你看你傻样！' },
+    { position: 1, content: '你才傻' },
+    { position: 0, content: '二货，你看你傻样！' },
+    { position: 1, content: '你才傻' },
+    { position: 0, content: '二货，你看你傻样！' },
+    { position: 1, content: '你才傻' },
+  ]
   return (
-    <div className={styles.log_list}>
-      {/* 通讯+搜索 */}
-      {renderList()}
-      {/* 侧边字母导航 */}
-      <div className={styles.list_shortcut}>
-        {
-          logs.map((item, index) => (
-            <div className={currentIndex === index ? styles.current : null} key={index} >{item.title}</div>
-          ))
-        }
+    <div style={{ flex: 1, height: "100%", width: "100%", background: "#F5F5F5", paddingTop: 10 }}>
+      {/* 导航栏 */}
+      <NavBar mode="dark" icon={<Icon type="left" />} onLeftClick={() => router.goBack()}
+        rightContent={[
+          <Icon key="1" type="ellipsis" onClick={() => { }} />,
+        ]}
+        style={{ background: "#F5F5F5", color: "black" }}
+      >
+        {`Sweetheart❤️恋人`}
+      </NavBar>
+      {data.map((itm, idx) => (
+        <div key={idx}>
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>{itm.time}</div>
+          <div className={itm.position === 0 ? styles.leftd : styles._righted}>
+            <img alt="" src={itm.position === 0 ? head1 : head2} className={styles.headImage} />
+            <div className={styles._speech}>{itm.content}</div>
+          </div>
+        </div>
+      ))}
+      <div className={styles.bottom_container}>
+        <div style={{ display: 'flex', height: '100%', justifyContent: "center", alignItems: "center" }}>
+          <img alt="" src={yuyin} className={styles.bootom_icon} />
+          <input className={styles.bootom_input} />
+          <img alt="" src={smile} className={styles.bootom_icon} />
+        </div>
       </div>
     </div>
   )
 }
-
-export default connect(state => ({
-  chat: state.chat,
-  loading: state.loading,
-}))(ClassPage)
+export default connect(({ chat }) => ({ chat }))(Chat);
