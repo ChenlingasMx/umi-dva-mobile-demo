@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'dva';
 import styles from './index.less'
 import Scroll from 'react-scroll-mobile'
-import { Card } from 'antd-mobile'
 import backgroud from '../../assets/headImage/WechatIMG1.jpeg'
 import headImage from '../../assets/WechatIMG34.jpeg'
 import headImage2 from '../../assets/headImage/WechatIMG37.jpeg'
@@ -34,8 +33,8 @@ class Moments extends Component {
     const { moments: { dataSource } } = this.props
     return (
       dataSource.map(itm => (
-        <Card key={itm.id}>
-          <Card.Body>
+        <div key={itm.id} style={{padding:10}}>
+          {/* <Card.Body> */}
             <div style={{ display: "flex", flexDirection: "row" }}>
               {/* 头像 */}
               <img alt="" src={headImage2} className={styles.head_Image} />
@@ -63,8 +62,8 @@ class Moments extends Component {
                 </div>
               </div>
             </div>
-          </Card.Body>
-        </Card>
+          {/* </Card.Body> */}
+        </div>
       ))
     )
   }
@@ -76,7 +75,7 @@ class Moments extends Component {
         <Scroll
           noMore={false}
           backTop
-          pullDownRefresh={async () => { }}
+          pullDownRefresh={ () => { }}
           pullUpLoad={() => { }}
         >
           {/* 朋友圈背景 */}

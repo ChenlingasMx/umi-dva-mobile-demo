@@ -62,7 +62,7 @@ class Detail extends Component {
         </List>
         <WhiteSpace size="lg" />
         {/* 按钮 */}
-        <Button icon={<img src={message} alt="" />} className={styles.button_font} >发送消息</Button>
+        <Button icon={<img src={message} alt="" />} className={styles.button_font} onClick={()=>router.push('/chat')} >发送消息</Button>
         <Button icon={<img src={video} alt="" />} className={styles.button_font} >音视频通话</Button>
       </div>
     )

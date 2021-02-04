@@ -62,7 +62,7 @@ class Home extends Component {
     return (
       <div style={{ flex: 1, height: "100%", width: "100%", background: "#F5F5F5" }}>
         {/* 搜索栏 */}
-        <SearchBar placeholder="搜索" maxLength={8} />
+        <SearchBar placeholder="搜索" maxLength={8} className={styles.search_item} />
         {/* 卡片 */}
         {this.state.imgList.map((itm, index) => (
           <List key={index} className={styles.list_item}>

@@ -98,7 +98,7 @@ const ClassPage = ({
           }}
         >
           {/* 搜索栏 */}
-          <SearchBar placeholder="" maxLength={8} />
+          <SearchBar placeholder="" maxLength={8} className={styles.search_item} />
           {/* 通讯栏 */}
           {
             list.map((itm, index) => (

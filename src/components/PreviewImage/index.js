@@ -48,6 +48,5 @@ class PreviewImage extends Component {
         </Modal>
     )
   }
-
 }
 export default PreviewImage
