@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
-import { List, SearchBar, SwipeAction } from 'antd-mobile'
+import { List, SwipeAction } from 'antd-mobile'
+import Search from '@/components/Search/index.js'
 import { connect } from 'dva';
 import styles from './index.less'
 import Scroll from 'react-scroll-mobile'
@@ -98,7 +99,7 @@ const ClassPage = ({
           }}
         >
           {/* 搜索栏 */}
-          <SearchBar placeholder="" maxLength={8} className={styles.search_item} />
+          <Search onSearch={(val) => console.log("val", val)} placeholder="搜索" maxLength={8} />
           {/* 通讯栏 */}
           {
             list.map((itm, index) => (

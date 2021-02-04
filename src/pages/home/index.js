@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { List, SearchBar } from 'antd-mobile'
+import { List } from 'antd-mobile'
+import Search from '@/components/Search/index.js'
 import styles from './index.less'
 import head from '../../assets/WechatIMG34.jpeg'
 import head2 from '../../assets/headImage/WechatIMG37.jpeg'
@@ -19,17 +20,17 @@ class Home extends Component {
       {
         img: head2,
         name: "🌞",
-        noise:noise
+        noise: noise
       },
       {
         img: head3,
         name: "🌛",
-        noise:noise
+        noise: noise
       },
       {
         img: head4,
         name: "✨",
-        noise:noise
+        noise: noise
       },
       {
         img: head2,
@@ -54,15 +55,14 @@ class Home extends Component {
       {
         img: head2,
         name: "🌟",
-        noise:noise
+        noise: noise
       },
     ]
   }
   render() {
     return (
       <div style={{ flex: 1, height: "100%", width: "100%", background: "#F5F5F5" }}>
-        {/* 搜索栏 */}
-        <SearchBar placeholder="搜索" maxLength={8} className={styles.search_item} />
+        <Search onSearch={(val) => console.log("val", val)} placeholder="搜索" maxLength={8} />
         {/* 卡片 */}
         {this.state.imgList.map((itm, index) => (
           <List key={index} className={styles.list_item}>
@@ -71,7 +71,7 @@ class Home extends Component {
               extra={
                 <div>
                   <div>15:13</div>
-                  {itm.noise&&<img src={itm.noise} alt="" style={{height:15,width:15}} />}
+                  {itm.noise && <img src={itm.noise} alt="" style={{ height: 15, width: 15 }} />}
                 </div>
               }
               onClick={() => { router.push('./chat') }}
