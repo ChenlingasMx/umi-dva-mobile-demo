@@ -40,7 +40,7 @@ class DetailMoments extends Component {
                 {/* 日期 */}
                 <div>
                   <span style={{ fontFamily: "cursive", fontWeight: "bolder", fontSize: 20 }}>{item.day}</span>
-                  <span style={{ fontFamily: "cursive", fontWeight: 400, fontSize: 14 }}>{item.year}</span>
+                  <span style={{ fontFamily: "cursive", fontWeight: "bolder", fontSize: 12 }}>{`${item.month}月`}</span>
                 </div>
                 {/* 照片 */}
                 <div style={{ marginLeft: 10, width: 110, wordBreak: "break-all" }}>
@@ -82,7 +82,7 @@ class DetailMoments extends Component {
           {/* 朋友圈背景 */}
           <img src={backgroud} alt="" className={styles.backgroud_image} />
           {/* 头像-名字 */}
-          <div style={{ position: 'absolute', top: "46.5%", right: 10, zIndex: 99 }}>
+          <div style={{ position: 'absolute', top: 350, right: 10, zIndex: 99 }}>
             <span className={styles.name_font}>Sweetheart❤恋人</span>
             <span><img alt="" src={headImage} className={styles.head_Image} /></span>
             <div style={{position:"absolute",right:0,marginTop:10}}>{`糕糕一只桃心丸❤️`}</div>
